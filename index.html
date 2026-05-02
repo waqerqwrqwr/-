@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蔡徐坤爱戴程度测试 | 满分100分</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        label:hover {
+            border-color: #3498db;
+            background: #f1f9ff;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #3498db;
+        }
+        #submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        #submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        #result {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            background: linear-gradient(135deg, #e1f5fe 0%, #f3e5f5 100%);
+        }
+        #score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0;
+        }
+        #level {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .share {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>蔡徐坤爱戴程度测试（满分100）</h1>
+        
+        <div id="quiz">
+            <!-- 问题1 -->
+            <div class="question">
+                <h3>1. 你是否能准确说出蔡徐坤的出生年份和粉丝名？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="10"> A. 完全能</label>
+                    <label><input type="radio" name="q1" value="8"> B. 能说出一个</label>
+                    <label><input type="radio" name="q1" value="5"> C. 模糊记得</label>
+                    <label><input type="radio" name="q1" value="0"> D. 完全不知道</label>
+                </div>
+            </div>
+
+            <!-- 问题2 -->
+            <div class="question">
+                <h3>2. 蔡徐坤的代表作品，你能说出多少个？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="10"> A. 5个及以上</label>
+                    <label><input type="radio" name="q2" value="8"> B. 3-4个</label>
+                    <label><input type="radio" name="q2" value="5"> C. 1-2个</label>
+                    <label><input type="radio" name="q2" value="0"> D. 一个都不知道</label>
+                </div>
+            </div>
+
+            <!-- 问题3 -->
+            <div class="question">
+                <h3>3. 蔡徐坤发布新作品，你会怎么做？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="10"> A. 第一时间支持关注</label>
+                    <label><input type="radio" name="q3" value="8"> B. 看到会偶尔支持</label>
+                    <label><input type="radio" name="q3" value="5"> C. 知道但不主动</label>
+                    <label><input type="radio" name="q3" value="0"> D. 完全不关注</label>
+                </div>
+            </div>
+
+            <!-- 问题4 -->
+            <div class="question">
+                <h3>4. 你是否了解蔡徐坤的应援色和应援口号？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="10"> A. 都能准确说出</label>
+                    <label><input type="radio" name="q4" value="8"> B. 只知道应援色</label>
+                    <label><input type="radio" name="q4" value="5"> C. 只听过不了解</label>
+                    <label><input type="radio" name="q4" value="0"> D. 完全不了解</label>
+                </div>
+            </div>
+
+            <!-- 问题5 -->
+            <div class="question">
+                <h3>5. 看到对蔡徐坤的恶意评价，你会？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="10"> A. 理性澄清维护</label>
+                    <label><input type="radio" name="q5" value="8"> B. 不争论但不认同</label>
+                    <label><input type="radio" name="q5" value="5"> C. 偶尔反驳几句</label>
+                    <label><input type="radio" name="q5" value="0"> D. 无所谓不关心</label>
+                </div>
+            </div>
+
+            <!-- 问题6 -->
+            <div class="question">
+                <h3>6. 你有没有收藏蔡徐坤周边、专辑、代言相关？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="10"> A. 收藏很多主动入坑</label>
+                    <label><input type="radio" name="q6" value="8"> B. 有少量收藏</label>
+                    <label><input type="radio" name="q6" value="5"> C. 想收藏还没有</label>
+                    <label><input type="radio" name="q6" value="0"> D. 完全没兴趣</label>
+                </div>
+            </div>
+
+            <!-- 问题7 -->
+            <div class="question">
+                <h3>7. 你会关注蔡徐坤的公益和正能量事迹吗？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="10"> A. 密切关注还会支持</label>
+                    <label><input type="radio" name="q7" value="8"> B. 偶尔了解动态</label>
+                    <label><input type="radio" name="q7" value="5"> C. 听过但不深入</label>
+                    <label><input type="radio" name="q7" value="0"> D. 完全不知道</label>
+                </div>
+            </div>
+
+            <!-- 问题8 -->
+            <div class="question">
+                <h3>8. 你对蔡徐坤舞台唱跳实力的评价？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="10"> A. 超优秀每次惊艳</label>
+                    <label><input type="radio" name="q8" value="8"> B. 很有实力有风格</label>
+                    <label><input type="radio" name="q8" value="5"> C. 一般偶尔有亮点</label>
+                    <label><input type="radio" name="q8" value="0"> D. 没感觉不喜欢</label>
+                </div>
+            </div>
+
+            <!-- 问题9 -->
+            <div class="question">
+                <h3>9. 你会主动给身边人安利蔡徐坤吗？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="10"> A. 经常主动推荐</label>
+                    <label><input type="radio" name="q9" value="8"> B. 觉得好才偶尔分享</label>
+                    <label><input type="radio" name="q9" value="5"> C. 别人问才说</label>
+                    <label><input type="radio" name="q9" value="0"> D. 从不推荐</label>
+                </div>
+            </div>
+
+            <!-- 问题10 -->
+            <div class="question">
+                <h3>10. 你喜欢蔡徐坤的主要原因？</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="10"> A. 颜值才华人品全方面爱</label>
+                    <label><input type="radio" name="q10" value="8"> B. 只爱作品和才华</label>
+                    <label><input type="radio" name="q10" value="5"> C. 单纯颜值好感</label>
+                    <label><input type="radio" name="q10" value="0"> D. 被迫答题无感</label>
+                </div>
+            </div>
+
+            <button id="submit">提交答案，查看结果</button>
+        </div>
+
+        <div id="result">
+            <h2>你的测试结果</h2>
+            <div id="score">0</div>
+            <div id="level">纯路人🤍</div>
+            <p id="description"></p>
+            <div class="share">
+                分享链接：<a id="shareLink" href="" target="_blank">https://你的用户名.github.io</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            let score = 0;
+            let allAnswered = true;
+
+            // 计算得分
+            for (let i = 1; i <= 10; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                    break;
+                }
+                score += parseInt(selected.value);
+            }
+
+            if (!allAnswered) {
+                alert('请回答所有问题！');
+                return;
+            }
+
+            // 确定等级
+            let level, description;
+            if (score >= 90) {
+                level = '真爱粉✨';
+                description = '你是死忠真爱粉，全程坚定偏爱，妥妥铁粉一枚！';
+            } else if (score >= 70) {
+                level = '核心守护粉🌙';
+                description = '真心欣赏他的实力人品，默默长久支持。';
+            } else if (score >= 40) {
+                level = '路人好感粉🌟';
+                description = '对蔡徐坤印象很好，有好感但不算深度入坑。';
+            } else {
+                level = '纯路人🤍';
+                description = '基本不了解，只是凑个热闹测一下而已。';
+            }
+
+            // 显示结果
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('score').textContent = score + '分';
+            document.getElementById('level').textContent = level;
+            document.getElementById('description').textContent = description;
+            
+            // 设置分享链接
+            const shareLink = document.getElementById('shareLink');
+            shareLink.href = window.location.href;
+            shareLink.textContent = window.location.href;
+        });
+    </script>
+</body>
+</html>

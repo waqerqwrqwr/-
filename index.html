@@ -3,287 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蔡徐坤爱戴程度测试 | 满分100分</title>
+    <title>小黑子人格测试</title>
+    <!-- GitHub风格简约样式 -->
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: "Arial", "Microsoft YaHei", sans-serif;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif;
         }
+
+        :root {
+            --primary: #2da44e;
+            --bg: #f6f8fa;
+            --card: #ffffff;
+            --text: #24292f;
+            --border: #d1d9e0;
+        }
+
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        .question {
-            margin-bottom: 25px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #f8f9fa;
-        }
-        h3 {
-            color: #34495e;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        .options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            align-items: center;
         }
-        label {
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 2px solid #ddd;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        label:hover {
-            border-color: #3498db;
-            background: #f1f9ff;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            accent-color: #3498db;
-        }
-        #submit {
-            display: block;
+
+        .container {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 20px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s;
-        }
-        #submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
-        #result {
-            display: none;
+            max-width: 600px;
             margin-top: 30px;
-            padding: 25px;
-            border-radius: 15px;
+        }
+
+        .header {
             text-align: center;
-            background: linear-gradient(135deg, #e1f5fe 0%, #f3e5f5 100%);
+            margin-bottom: 30px;
         }
-        #score {
-            font-size: 48px;
-            font-weight: bold;
-            color: #e74c3c;
-            margin: 15px 0;
-        }
-        #level {
+
+        .header h1 {
             font-size: 24px;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            color: var(--text);
+            margin-bottom: 8px;
         }
-        .share {
-            margin-top: 20px;
-            padding: 10px;
-            background: #f1f1f1;
-            border-radius: 8px;
+
+        .header p {
+            color: #656d76;
             font-size: 14px;
-            color: #555;
+        }
+
+        /* 题目卡片 */
+        .quiz-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .quiz-card.active {
+            display: block;
+            animation: fade 0.3s ease;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-num {
+            font-size: 13px;
+            color: #656d76;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* 选项样式 */
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: #f6ffed;
+        }
+
+        .option input {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* 结果卡片 */
+        .result-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 32px;
+            display: none;
+            animation: fade 0.4s ease;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        .result-score {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .result-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 16px 0;
+            color: var(--text);
+        }
+
+        .result-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e8f0fe;
+            color: #0969da;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 0 4px 8px 0;
+        }
+
+        .result-desc {
+            line-height: 1.8;
+            font-size: 16px;
+            margin: 16px 0;
+            color: #373d42;
+        }
+
+        .result-feature {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .result-feature h4 {
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .tips {
+            text-align: center;
+            font-size: 12px;
+            color: #656d76;
+            margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>蔡徐坤爱戴程度测试（满分100）</h1>
-        
-        <div id="quiz">
-            <!-- 问题1 -->
-            <div class="question">
-                <h3>1. 你是否能准确说出蔡徐坤的出生年份和粉丝名？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q1" value="10"> A. 完全能</label>
-                    <label><input type="radio" name="q1" value="8"> B. 能说出一个</label>
-                    <label><input type="radio" name="q1" value="5"> C. 模糊记得</label>
-                    <label><input type="radio" name="q1" value="0"> D. 完全不知道</label>
-                </div>
-            </div>
-
-            <!-- 问题2 -->
-            <div class="question">
-                <h3>2. 蔡徐坤的代表作品，你能说出多少个？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q2" value="10"> A. 5个及以上</label>
-                    <label><input type="radio" name="q2" value="8"> B. 3-4个</label>
-                    <label><input type="radio" name="q2" value="5"> C. 1-2个</label>
-                    <label><input type="radio" name="q2" value="0"> D. 一个都不知道</label>
-                </div>
-            </div>
-
-            <!-- 问题3 -->
-            <div class="question">
-                <h3>3. 蔡徐坤发布新作品，你会怎么做？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q3" value="10"> A. 第一时间支持关注</label>
-                    <label><input type="radio" name="q3" value="8"> B. 看到会偶尔支持</label>
-                    <label><input type="radio" name="q3" value="5"> C. 知道但不主动</label>
-                    <label><input type="radio" name="q3" value="0"> D. 完全不关注</label>
-                </div>
-            </div>
-
-            <!-- 问题4 -->
-            <div class="question">
-                <h3>4. 你是否了解蔡徐坤的应援色和应援口号？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q4" value="10"> A. 都能准确说出</label>
-                    <label><input type="radio" name="q4" value="8"> B. 只知道应援色</label>
-                    <label><input type="radio" name="q4" value="5"> C. 只听过不了解</label>
-                    <label><input type="radio" name="q4" value="0"> D. 完全不了解</label>
-                </div>
-            </div>
-
-            <!-- 问题5 -->
-            <div class="question">
-                <h3>5. 看到对蔡徐坤的恶意评价，你会？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q5" value="10"> A. 理性澄清维护</label>
-                    <label><input type="radio" name="q5" value="8"> B. 不争论但不认同</label>
-                    <label><input type="radio" name="q5" value="5"> C. 偶尔反驳几句</label>
-                    <label><input type="radio" name="q5" value="0"> D. 无所谓不关心</label>
-                </div>
-            </div>
-
-            <!-- 问题6 -->
-            <div class="question">
-                <h3>6. 你有没有收藏蔡徐坤周边、专辑、代言相关？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q6" value="10"> A. 收藏很多主动入坑</label>
-                    <label><input type="radio" name="q6" value="8"> B. 有少量收藏</label>
-                    <label><input type="radio" name="q6" value="5"> C. 想收藏还没有</label>
-                    <label><input type="radio" name="q6" value="0"> D. 完全没兴趣</label>
-                </div>
-            </div>
-
-            <!-- 问题7 -->
-            <div class="question">
-                <h3>7. 你会关注蔡徐坤的公益和正能量事迹吗？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q7" value="10"> A. 密切关注还会支持</label>
-                    <label><input type="radio" name="q7" value="8"> B. 偶尔了解动态</label>
-                    <label><input type="radio" name="q7" value="5"> C. 听过但不深入</label>
-                    <label><input type="radio" name="q7" value="0"> D. 完全不知道</label>
-                </div>
-            </div>
-
-            <!-- 问题8 -->
-            <div class="question">
-                <h3>8. 你对蔡徐坤舞台唱跳实力的评价？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q8" value="10"> A. 超优秀每次惊艳</label>
-                    <label><input type="radio" name="q8" value="8"> B. 很有实力有风格</label>
-                    <label><input type="radio" name="q8" value="5"> C. 一般偶尔有亮点</label>
-                    <label><input type="radio" name="q8" value="0"> D. 没感觉不喜欢</label>
-                </div>
-            </div>
-
-            <!-- 问题9 -->
-            <div class="question">
-                <h3>9. 你会主动给身边人安利蔡徐坤吗？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q9" value="10"> A. 经常主动推荐</label>
-                    <label><input type="radio" name="q9" value="8"> B. 觉得好才偶尔分享</label>
-                    <label><input type="radio" name="q9" value="5"> C. 别人问才说</label>
-                    <label><input type="radio" name="q9" value="0"> D. 从不推荐</label>
-                </div>
-            </div>
-
-            <!-- 问题10 -->
-            <div class="question">
-                <h3>10. 你喜欢蔡徐坤的主要原因？</h3>
-                <div class="options">
-                    <label><input type="radio" name="q10" value="10"> A. 颜值才华人品全方面爱</label>
-                    <label><input type="radio" name="q10" value="8"> B. 只爱作品和才华</label>
-                    <label><input type="radio" name="q10" value="5"> C. 单纯颜值好感</label>
-                    <label><input type="radio" name="q10" value="0"> D. 被迫答题无感</label>
-                </div>
-            </div>
-
-            <button id="submit">提交答案，查看结果</button>
+        <div class="header">
+            <h1>小黑子人格趣味测试</h1>
+            <p>文明玩梗 · 趣味整活 · 无恶意攻击</p>
         </div>
 
-        <div id="result">
-            <h2>你的测试结果</h2>
-            <div id="score">0</div>
-            <div id="level">纯路人🤍</div>
-            <p id="description"></p>
-            <div class="share">
-                分享链接：<a id="shareLink" href="" target="_blank">https://你的用户名.github.io</a>
+        <!-- 20道题目 单页显示 -->
+        <div class="quiz-card active" data-question="1">
+            <div class="question-num">第 1 题 / 共 20 题</div>
+            <div class="question-text">当听到经典专属BGM响起，你的第一反应是？</div>
+            <div class="option"><input type="radio" name="q" value="4" id="q1a"><label for="q1a">A. 立刻接梗，脑子里自动浮现名场面</label></div>
+            <div class="option"><input type="radio" name="q" value="3" id="q1b"><label for="q1b">B. 会心一笑，秒懂是什么梗，默默乐一下</label></div>
+            <div class="option"><input type="radio" name="q" value="2" id="q1c"><label for="q1c">C. 假装听不懂，实则心里门儿清</label></div>
+            <div class="option"><input type="radio" name="q" value="1" id="q1d"><label for="q1d">D. 毫无感觉，完全没get到笑点</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="2">
+            <div class="question-num">第 2 题 / 共 20 题</div>
+            <div class="question-text">刷到蔡徐坤打篮球经典视频，你会？</div>
+            <div class="option"><input type="radio" name="q2" value="4"><label>A. 反复观看，还保存转发给朋友</label></div>
+            <div class="option"><input type="radio" name="q2" value="3"><label>B. 看一遍笑笑就划走，不刻意深究</label></div>
+            <div class="option"><input type="radio" name="q2" value="2"><label>C. 快速划走，但偷偷记住所有细节</label></div>
+            <div class="option"><input type="radio" name="q2" value="1"><label>D. 直接划过，不感兴趣也不凑热闹</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="3">
+            <div class="question-num">第 3 题 / 共 20 题</div>
+            <div class="question-text">朋友在群里发相关梗图，你会？</div>
+            <div class="option"><input type="radio" name="q3" value="4"><label>A. 立马跟上玩梗，连发表情包接话</label></div>
+            <div class="option"><input type="radio" name="q3" value="3"><label>B. 潜水围观，默默看大家整活不发言</label></div>
+            <div class="option"><input type="radio" name="q3" value="2"><label>C. 故意装看不懂，看其他人表演</label></div>
+            <div class="option"><input type="radio" name="q3" value="1"><label>D. 随便发个表情附和一下就完事</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="4">
+            <div class="question-num">第 4 题 / 共 20 题</div>
+            <div class="question-text">手机相册里小黑子表情包数量？</div>
+            <div class="option"><input type="radio" name="q4" value="4"><label>A. 海量库存，分类收藏随时能用</label></div>
+            <div class="option"><input type="radio" name="q4" value="3"><label>B. 存了几张经典的，偶尔用用</label></div>
+            <div class="option"><input type="radio" name="q4" value="2"><label>C. 一张不存，但所有梗都记在脑子里</label></div>
+            <div class="option"><input type="radio" name="q4" value="1"><label>D. 几乎没有，很少保存这类图</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="5">
+            <div class="question-num">第 5 题 / 共 20 题</div>
+            <div class="question-text">有人无脑辱骂、人身攻击蔡徐坤，你会？</div>
+            <div class="option"><input type="radio" name="q5" value="4"><label>A. 只玩搞笑梗，反感恶意骂人，会制止</label></div>
+            <div class="option"><input type="radio" name="q5" value="3"><label>B. 保持中立，不参与争吵也不站队</label></div>
+            <div class="option"><input type="radio" name="q5" value="2"><label>C. 默默吃瓜围观，不掺和任何争论</label></div>
+            <div class="option"><input type="radio" name="q5" value="1"><label>D. 跟着一起跟风吐槽，凑个热闹</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="6">
+            <div class="question-num">第 6 题 / 共 20 题</div>
+            <div class="question-text">现实中和朋友线下聊天，会主动玩梗吗？</div>
+            <div class="option"><input type="radio" name="q6" value="4"><label>A. 张口就来，日常聊天全是经典梗</label></div>
+            <div class="option"><input type="radio" name="q6" value="3"><label>B. 只在很熟的朋友间偶尔调侃两句</label></div>
+            <div class="option"><input type="radio" name="q6" value="2"><label>C. 绝不主动提，只等别人先说再懂</label></div>
+            <div class="option"><input type="radio" name="q6" value="1"><label>D. 从不玩梗，觉得没必要跟风</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="7">
+            <div class="question-num">第 7 题 / 共 20 题</div>
+            <div class="question-text">看到网上制作的蔡徐坤搞笑二创视频，你会？</div>
+            <div class="option"><input type="radio" name="q7" value="4"><label>A. 点赞收藏，还会推荐给同好</label></div>
+            <div class="option"><input type="radio" name="q7" value="3"><label>B. 看完乐一乐，不点赞也不评论</label></div>
+            <div class="option"><input type="radio" name="q7" value="2"><label>C. 悄悄看完，假装没看过不露声色</label></div>
+            <div class="option"><input type="radio" name="q7" value="1"><label>D. 觉得无聊，直接划走不看</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="8">
+            <div class="question-num">第 8 题 / 共 20 题</div>
+            <div class="question-text">别人当面问你：你是不是小黑子？</div>
+            <div class="option"><input type="radio" name="q8" value="4"><label>A. 大方承认，直言就是爱玩梗</label></div>
+            <div class="option"><input type="radio" name="q8" value="3"><label>B. 说自己只是纯路人，单纯吃瓜</label></div>
+            <div class="option"><input type="radio" name="q8" value="2"><label>C. 极力否认，伪装成完全不懂梗</label></div>
+            <div class="option"><input type="radio" name="q8" value="1"><label>D. 无所谓，随便别人怎么定义</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="9">
+            <div class="question-num">第 9 题 / 共 20 题</div>
+            <div class="question-text">刷到蔡徐坤正规舞台、音乐作品，你的态度？</div>
+            <div class="option"><input type="radio" name="q9" value="4"><label>A. 分开看待，玩梗归玩梗，实力归实力</label></div>
+            <div class="option"><input type="radio" name="q9" value="3"><label>B. 客观欣赏舞台，不玩梗也不贬低</label></div>
+            <div class="option"><input type="radio" name="q9" value="2"><label>C. 表面不屑，实则悄悄欣赏颜值舞台</label></div>
+            <div class="option"><input type="radio" name="q9" value="1"><label>D. 自带偏见，不管好坏都直接否定</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="10">
+            <div class="question-num">第 10 题 / 共 20 题</div>
+            <div class="question-text">你会特意去搜集各类小黑子冷门梗吗？</div>
+            <div class="option"><input type="radio" name="q10" value="4"><label>A. 会，主动考古挖各种老梗、冷门名场面</label></div>
+            <div class="option"><input type="radio" name="q10" value="3"><label>B. 随缘刷到就记，不会刻意搜集</label></div>
+            <div class="option"><input type="radio" name="q10" value="2"><label>C. 别人说啥都能懂，但自己不主动找</label></div>
+            <div class="option"><input type="radio" name="q10" value="1"><label>D. 完全不关心，只知道最火的几个梗</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="11">
+            <div class="question-num">第 11 题 / 共 20 题</div>
+            <div class="question-text">在评论区看到玩梗评论，你会怎么做？</div>
+            <div class="option"><input type="radio" name="q11" value="4"><label>A. 评论区接梗互动，玩得不亦乐乎</label></div>
+            <div class="option"><input type="radio" name="q11" value="3"><label>B. 默默点赞，不发表自己的言论</label></div>
+            <div class="option"><input type="radio" name="q11" value="2"><label>C. 路过看一看，从不点赞也不评论</label></div>
+            <div class="option"><input type="radio" name="q11" value="1"><label>D. 觉得没意思，甚至反感这类评论</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="12">
+            <div class="question-num">第 12 题 / 共 20 题</div>
+            <div class="question-text">会不会模仿经典名场面的动作、台词？</div>
+            <div class="option"><input type="radio" name="q12" value="4"><label>A. 经常和朋友模仿，整活氛围感拉满</label></div>
+            <div class="option"><input type="radio" name="q12" value="3"><label>B. 偶尔私下自己偷偷模仿玩玩</label></div>
+            <div class="option"><input type="radio" name="q12" value="2"><label>C. 只心里脑补，从来不会表现出来</label></div>
+            <div class="option"><input type="radio" name="q12" value="1"><label>D. 完全不会，觉得很尴尬没必要</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="13">
+            <div class="question-num">第 13 题 / 共 20 题</div>
+            <div class="question-text">饭圈粉丝严肃抵制玩梗时，你会？</div>
+            <div class="option"><input type="radio" name="q13" value="4"><label>A. 适度收敛，不故意去粉丝圈刷屏</label></div>
+            <div class="option"><input type="radio" name="q13" value="3"><label>B. 互不打扰，各自玩各自的就行</label></div>
+            <div class="option"><input type="radio" name="q13" value="2"><label>C. 换个小号继续偷偷玩，不被发现</label></div>
+            <div class="option"><input type="radio" name="q13" value="1"><label>D. 偏要对着玩梗，故意惹对方生气</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="14">
+            <div class="question-num">第 14 题 / 共 20 题</div>
+            <div class="question-text">你身边玩小黑子梗的朋友多吗？</div>
+            <div class="option"><input type="radio" name="q14" value="4"><label>A. 超多，日常全员一起整活玩梗</label></div>
+            <div class="option"><input type="radio" name="q14" value="3"><label>B. 就两三个好友私下偶尔玩玩</label></div>
+            <div class="option"><input type="radio" name="q14" value="2"><label>C. 身边没人玩，只有自己独自懂梗</label></div>
+            <div class="option"><input type="radio" name="q14" value="1"><label>D. 身边没人玩，自己也不融入</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="15">
+            <div class="question-num">第 15 题 / 共 20 题</div>
+            <div class="question-text">刷短视频刷到相关梗的直播切片，你会？</div>
+            <div class="option"><input type="radio" name="q15" value="4"><label>A. 看完完整版，反复回味笑点</label></div>
+            <div class="option"><input type="radio" name="q15" value="3"><label>B. 看一小段觉得好笑就划走</label></div>
+            <div class="option"><input type="radio" name="q15" value="2"><label>C. 快速划过，但瞬间听懂所有内涵</label></div>
+            <div class="option"><input type="radio" name="q15" value="1"><label>D. 直接屏蔽此类内容，不想刷到</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="16">
+            <div class="question-num">第 16 题 / 共 20 题</div>
+            <div class="question-text">你能分清玩梗、调侃和人身攻击的区别吗？</div>
+            <div class="option"><input type="radio" name="q16" value="4"><label>A. 分得很清，坚守底线只玩文明梗</label></div>
+            <div class="option"><input type="radio" name="q16" value="3"><label>B. 大概能分清，不参与过分的言论</label></div>
+            <div class="option"><input type="radio" name="q16" value="2"><label>C. 不太在意，跟着大众节奏走就行</label></div>
+            <div class="option"><input type="radio" name="q16" value="1"><label>D. 觉得都一样，没什么区别</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="17">
+            <div class="question-num">第 17 题 / 共 20 题</div>
+            <div class="question-text">会不会给自己的网名、头像整小黑子风格？</div>
+            <div class="option"><input type="radio" name="q17" value="4"><label>A. 会，直接用梗图、相关趣味网名</label></div>
+            <div class="option"><input type="radio" name="q17" value="3"><label>B. 不会明着用，偶尔用小众梗暗示</label></div>
+            <div class="option"><input type="radio" name="q17" value="2"><label>C. 完全不用，伪装成普通路人账号</label></div>
+            <div class="option"><input type="radio" name="q17" value="1"><label>D. 从来没想过，也不感兴趣</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="18">
+            <div class="question-num">第 18 题 / 共 20 题</div>
+            <div class="question-text">看到萌新不懂经典梗来问你，你会？</div>
+            <div class="option"><input type="radio" name="q18" value="4"><label>A. 热情科普，带新人入坑懂梗</label></div>
+            <div class="option"><input type="radio" name="q18" value="3"><label>B. 简单点拨一下，不细说太多</label></div>
+            <div class="option"><input type="radio" name="q18" value="2"><label>C. 装作不知道，不做任何解释</label></div>
+            <div class="option"><input type="radio" name="q18" value="1"><label>D. 懒得搭理，觉得没必要科普</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="19">
+            <div class="question-num">第 19 题 / 共 20 题</div>
+            <div class="question-text">玩梗时会不会刻意去刷屏、到处乱发？</div>
+            <div class="option"><input type="radio" name="q19" value="4"><label>A. 只在合适圈子玩，从不乱刷屏引流</label></div>
+            <div class="option"><input type="radio" name="q19" value="3"><label>B. 偶尔和熟人刷屏，公共场合克制</label></div>
+            <div class="option"><input type="radio" name="q19" value="2"><label>C. 从不发评论刷屏，只自己默默懂</label></div>
+            <div class="option"><input type="radio" name="q19" value="1"><label>D. 喜欢到处刷屏，到处刷梗凑热闹</label></div>
+        </div>
+
+        <div class="quiz-card" data-question="20">
+            <div class="question-num">第 20 题 / 共 20 题</div>
+            <div class="question-text">玩小黑子梗对你来说，更多是？</div>
+            <div class="option"><input type="radio" name="q20" value="4"><label>A. 日常解压、和朋友整活的乐趣</label></div>
+            <div class="option"><input type="radio" name="q20" value="3"><label>B. 单纯吃瓜消遣，打发时间而已</label></div>
+            <div class="option"><input type="radio" name="q20" value="2"><label>C. 隐藏的小爱好，只属于自己的乐趣</label></div>
+            <div class="option"><input type="radio" name="q20" value="1"><label>D. 随大流跟风，别人玩我就跟着玩</label></div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div class="result-card" id="result">
+            <div class="result-score" id="score"></div>
+            <h2 class="result-title" id="name"></h2>
+            <div id="tags"></div>
+            <div class="result-desc" id="desc"></div>
+            <div class="result-feature">
+                <h4>📊 你的专属特质</h4>
+                <p id="feature"></p>
             </div>
+            <div class="tips">文明玩梗，快乐整活 ~</div>
         </div>
     </div>
 
     <script>
-        document.getElementById('submit').addEventListener('click', function() {
-            let score = 0;
-            let allAnswered = true;
+        // 全局变量
+        let currentQuestion = 1;
+        let totalScore = 0;
+        const totalQuestions = 20;
 
-            // 计算得分
-            for (let i = 1; i <= 10; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (!selected) {
-                    allAnswered = false;
-                    break;
-                }
-                score += parseInt(selected.value);
-            }
+        // 监听所有选项选择
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', function () {
+                // 累加分数
+                totalScore += parseInt(this.value);
+                // 切换下一题
+                nextQuestion();
+            });
+        });
 
-            if (!allAnswered) {
-                alert('请回答所有问题！');
+        // 切换题目函数
+        function nextQuestion() {
+            // 隐藏当前题
+            document.querySelector(`.quiz-card[data-question="${currentQuestion}"]`).classList.remove('active');
+            currentQuestion++;
+
+            // 判断是否答完所有题
+            if (currentQuestion > totalQuestions) {
+                showResult();
                 return;
             }
 
-            // 确定等级
-            let level, description;
-            if (score >= 90) {
-                level = '真爱粉✨';
-                description = '你是死忠真爱粉，全程坚定偏爱，妥妥铁粉一枚！';
-            } else if (score >= 70) {
-                level = '核心守护粉🌙';
-                description = '真心欣赏他的实力人品，默默长久支持。';
-            } else if (score >= 40) {
-                level = '路人好感粉🌟';
-                description = '对蔡徐坤印象很好，有好感但不算深度入坑。';
+            // 显示下一题
+            document.querySelector(`.quiz-card[data-question="${currentQuestion}"]`).classList.add('active');
+        }
+
+        // 展示丰富结果
+        function showResult() {
+            const resultCard = document.getElementById('result');
+            const scoreEl = document.getElementById('score');
+            const nameEl = document.getElementById('name');
+            const tagsEl = document.getElementById('tags');
+            const descEl = document.getElementById('desc');
+            const featureEl = document.getElementById('feature');
+
+            let name, desc, feature, tags;
+
+            // 分数区间匹配 + 内容大丰富
+            if (totalScore >= 70) {
+                name = "整活梗王型 🎭";
+                tags = ['玩梗天花板', '气氛组组长', '文明玩梗'];
+                desc = "你是全网公认的小黑子顶流！梗库储量满分，热门冷门梗烂熟于心，是朋友中的玩梗领袖。你坚守文明玩梗的底线，只整活不攻击，用快乐感染身边所有人，是最受欢迎的玩梗达人！";
+                feature = "✅ 核心优势：梗多、会玩、情商高；✅ 社交属性：朋友圈气氛担当；✅ 玩梗等级：SSS 级大神；✅ 专属宣言：玩梗不恶意，快乐最无敌！";
+            } else if (totalScore >= 60) {
+                name = "理智绅士型 🎩";
+                tags = ['理性吃瓜', '分寸感拉满', '温柔玩家'];
+                desc = "你是最有格局的小黑子！懂所有梗但从不乱刷，分得清调侃与恶意，坚守玩梗底线。佛系吃瓜不参与饭圈争吵，理智又温柔，是圈子里最让人舒服的存在，低调又有内涵。";
+                feature = "✅ 核心优势：清醒、克制、有底线；✅ 社交属性：低调观察者；✅ 玩梗等级：S 级资深玩家；✅ 专属宣言：适度玩梗，互不打扰！";
+            } else if (totalScore >= 50) {
+                name = "卧底伪装型 🕵️";
+                tags = ['隐藏大神', '伪装王者', '默默懂梗'];
+                desc = "你是隐藏最深的终极卧底！表面是平平无奇的路人，装作对梗一无所知，实则所有名场面、内涵梗都烂熟于心。从不主动暴露身份，默默围观全场，伪装能力堪称教科书级别！";
+                feature = "✅ 核心优势：隐忍、深藏不露、观察力拉满；✅ 社交属性：神秘路人；✅ 玩梗等级：S 级隐藏大佬；✅ 专属宣言：看破不说破，深藏功与名！";
+            } else if (totalScore >= 40) {
+                name = "佛系路人型 🧘";
+                tags = ['随缘吃瓜', '佛系玩家', '不凑热闹'];
+                desc = "你是标准的佛系吃瓜人！对玩梗没有执念，不主动考古、不收藏梗图，刷到就乐一乐，刷不到也无所谓。不参与任何争论，不站队不跟风，主打一个轻松自在，随缘就好。";
+                feature = "✅ 核心优势：佛系、淡然、无压力；✅ 社交属性：路人围观党；✅ 玩梗等级：A级普通玩家；✅ 专属宣言：吃瓜不入坑，快乐躺平！";
+            } else if (totalScore >= 35) {
+                name = "暗中整活型 🤫";
+                tags = ['闷骚玩梗', '私下大神', '低调整活'];
+                desc = "你是典型的暗中整活选手！表面低调正经，私下里梗力爆棚，只在私密好友圈放飞自我。不爱公开张扬，却拥有超强的玩梗天赋，属于外表冷静、内心戏十足的闷骚大神！";
+                feature = "✅ 核心优势：反差感、私密整活、笑点独特；✅ 社交属性：私密圈达人；✅ 玩梗等级：A级潜力玩家；✅ 专属宣言：私下整活，快乐加倍！";
+            } else if (totalScore >= 30) {
+                name = "佛系调侃型 😐";
+                tags = ['轻度玩梗', '浅度吃瓜', '随性而为'];
+                desc = "你是浅度玩梗爱好者！只知道最热门的经典梗，不深究冷门知识，不收藏素材。看到梗会会心一笑，看完就忘，不纠结不较真，纯纯把玩梗当成打发时间的小乐趣。";
+                feature = "✅ 核心优势：轻松、无负担、不沉迷；✅ 社交属性：轻度围观者；✅ 玩梗等级：B级休闲玩家；✅ 专属宣言：浅尝辄止，快乐就行！";
+            } else if (totalScore >= 25) {
+                name = "随性跟风型 🎐";
+                tags = ['潮流跟随者', '随性玩家', '快乐凑热闹'];
+                desc = "你是紧跟网络潮流的随性选手！没有固定梗库，网络火什么就玩什么，主打一个凑热闹、图开心。性格大大咧咧，不纠结对错，跟着大家一起玩梗就很快乐！";
+                feature = "✅ 核心优势：随和、潮流、爱热闹；✅ 社交属性：跟风快乐党；✅ 玩梗等级：B级潮流玩家；✅ 专属宣言：跟着潮流走，快乐天天有！";
             } else {
-                level = '纯路人🤍';
-                description = '基本不了解，只是凑个热闹测一下而已。';
+                name = "高冷懂梗型 ❄️";
+                tags = ['清冷观察者', '高冷玩家', '看破不说破'];
+                desc = "你是最高冷的懂梗人！看透所有梗却从不参与任何热闹，不评论、不模仿、不分享，独自沉浸在自己的世界里。保持距离感，理智又清冷，是圈子里最神秘的安静观察者。";
+                feature = "✅ 核心优势：高冷、清醒、独立；✅ 社交属性：神秘旁观者；✅ 玩梗等级：A级高冷大神；✅ 专属宣言：静静围观，不语自明！";
             }
 
-            // 显示结果
-            document.getElementById('quiz').style.display = 'none';
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('score').textContent = score + '分';
-            document.getElementById('level').textContent = level;
-            document.getElementById('description').textContent = description;
-            
-            // 设置分享链接
-            const shareLink = document.getElementById('shareLink');
-            shareLink.href = window.location.href;
-            shareLink.textContent = window.location.href;
-        });
+            // 渲染结果
+            scoreEl.innerText = `你的总得分：${totalScore} / 80 分`;
+            nameEl.innerText = name;
+            tagsEl.innerHTML = tags.map(tag => `<span class="result-tag">${tag}</span>`).join('');
+            descEl.innerText = desc;
+            featureEl.innerText = feature;
+            resultCard.classList.add('show');
+        }
     </script>
 </body>
 </html>
